@@ -7,6 +7,7 @@
     tools:context=".views.RecipeActivity">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/stepsRecycler"
         android:layout_width="387dp"
         android:layout_height="563dp"
         tools:layout_editor_absoluteX="12dp"
