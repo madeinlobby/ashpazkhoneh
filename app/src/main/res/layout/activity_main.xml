@@ -8,6 +8,7 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/foodRecycler"
         android:layout_width="357dp"
         android:layout_height="575dp"
         tools:layout_editor_absoluteX="27dp"
