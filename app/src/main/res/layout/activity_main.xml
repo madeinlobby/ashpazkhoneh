@@ -17,10 +17,13 @@
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
+        android:onClick="addNewFoodButton"
         android:layout_height="wrap_content"
         android:clickable="true"
         app:srcCompat="@android:drawable/ic_menu_add"
         tools:layout_editor_absoluteX="319dp"
-        tools:layout_editor_absoluteY="640dp" />
+        tools:layout_editor_absoluteY="640dp"
+        android:focusable="true"
+        tools:ignore="OnClick" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

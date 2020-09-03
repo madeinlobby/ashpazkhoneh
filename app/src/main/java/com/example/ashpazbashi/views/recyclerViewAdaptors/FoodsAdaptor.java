@@ -19,16 +19,18 @@ public class FoodsAdaptor extends RecyclerView.Adapter<FoodsAdaptor.ViewHolder> 
 
     private ArrayList<Food> data;
     private LayoutInflater inflater;
+    private onFoodListener listener;
 
-    public FoodsAdaptor(ArrayList<Food> data, Context context) {
+    public FoodsAdaptor(ArrayList<Food> data, Context context, onFoodListener listener) {
         this.data = data;
         this.inflater = LayoutInflater.from(context);
+        this.listener = listener;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(inflater.inflate(R.layout.food_row,parent,false));
+        return new ViewHolder(inflater.inflate(R.layout.food_row,parent,false), listener);
     }
 
     @Override
@@ -49,17 +51,30 @@ public class FoodsAdaptor extends RecyclerView.Adapter<FoodsAdaptor.ViewHolder> 
         return data.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView nameField;
         TextView categoryField;
         ImageView imageField;
+        onFoodListener onFoodListener;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView, onFoodListener onFoodListener) {
             super(itemView);
             nameField = itemView.findViewById(R.id.foodNameText);
             categoryField = itemView.findViewById(R.id.categoriesText);
             imageField = itemView.findViewById(R.id.foodImageRecycler);
+            this.onFoodListener = onFoodListener;
+
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View view) {
+            onFoodListener.onClick(getAdapterPosition());
+        }
+    }
+
+    public interface onFoodListener {
+        void onClick(int position);
     }
 }

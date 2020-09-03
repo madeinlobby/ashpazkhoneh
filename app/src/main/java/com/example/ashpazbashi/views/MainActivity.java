@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.ashpazbashi.R;
@@ -14,7 +15,7 @@ import com.example.ashpazbashi.views.recyclerViewAdaptors.FoodsAdaptor;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements FoodsAdaptor.onFoodListener {
 
     public static MainController controller = new MainController();
 
@@ -26,10 +27,24 @@ public class MainActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.foodRecycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        FoodsAdaptor foodsAdaptor = new FoodsAdaptor((ArrayList<Food>) controller.getAllFoods(),this);
+        FoodsAdaptor foodsAdaptor = new FoodsAdaptor((ArrayList<Food>) controller.getAllFoods(),this, this);
         recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(),DividerItemDecoration.VERTICAL));
         recyclerView.setAdapter(foodsAdaptor);
     }
 
+    public void addNewFoodButton() {
+        Intent intent = new Intent(this,AddFoodActivity.class);
+        startActivity(intent);
+    }
 
+
+    @Override
+    public void onClick(int position) {
+
+        Food currentFood = controller.getAllFoods().get(position);
+        EditFoodActivity.setFood(currentFood);
+        Intent intent = new Intent(this, EditFoodActivity.class);
+        startActivity(intent);
+
+    }
 }
