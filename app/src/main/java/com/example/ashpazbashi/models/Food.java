@@ -2,6 +2,7 @@ package com.example.ashpazbashi.models;
 
 import com.example.ashpazbashi.models.ingredients.Ingredient;
 import com.example.ashpazbashi.models.recipe.Recipe;
+import com.example.ashpazbashi.views.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,14 +15,11 @@ public class Food {
     private Recipe recipe;
     //list of pictures and videos will be added later
 
-    public Food(String name, List<Category> categories, String description, List<Ingredient> ingredients, Recipe recipe) {
+    public Food(String name) {
         this.ingredients = new ArrayList<>();
         this.categories = new ArrayList<>();
+        MainActivity.controller.getAllFoods().add(this);
         this.name = name;
-        this.categories = categories;
-        this.description = description;
-        this.ingredients = ingredients;
-        this.recipe = recipe;
     }
 
     public String getName() {

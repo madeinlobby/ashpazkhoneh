@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.example.ashpazbashi.R;
 import com.example.ashpazbashi.controllers.MainController;
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements FoodsAdaptor.onFo
         recyclerView.setAdapter(foodsAdaptor);
     }
 
-    public void addNewFoodButton() {
+    public void addNewFoodButton(View view) {
         Intent intent = new Intent(this,AddFoodActivity.class);
         startActivity(intent);
     }

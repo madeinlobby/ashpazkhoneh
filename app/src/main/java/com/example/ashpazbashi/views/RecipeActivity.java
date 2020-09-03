@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public class RecipeActivity extends AppCompatActivity {
 
-    private Food food;
+    private static Food food;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,11 +30,11 @@ public class RecipeActivity extends AppCompatActivity {
         recyclerView.setAdapter(stepAdaptor);
     }
 
-    public Food getFood() {
+    public static Food getFood() {
         return food;
     }
 
-    public void setFood(Food food) {
-        this.food = food;
+    public static void setFood(Food food) {
+        RecipeActivity.food = food;
     }
 }
