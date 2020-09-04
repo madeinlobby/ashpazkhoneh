@@ -14,6 +14,8 @@ import android.widget.TextView;
 import com.example.ashpazbashi.R;
 import com.example.ashpazbashi.models.Category;
 import com.example.ashpazbashi.models.Food;
+import com.example.ashpazbashi.models.ingredients.Ingredient;
+import com.example.ashpazbashi.models.recipe.Recipe;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,6 +23,8 @@ import java.util.Arrays;
 public class AddFoodActivity extends AppCompatActivity {
 
     private Food food;
+    private Recipe recipe;
+    private Ingredient ingredient;
     String[] categoryItems;
     boolean[] checkedItems;
     Button addCategory;
@@ -92,6 +96,9 @@ public class AddFoodActivity extends AppCompatActivity {
         });
 
         this.food = new Food(null);
+        this.recipe = new Recipe(food);
+        //get an Ingredient object an set it to food
+        this.food.setRecipe(recipe);
     }
 
     public void recipeButtonTaped(View view) {
@@ -104,8 +111,9 @@ public class AddFoodActivity extends AppCompatActivity {
             food.setDescription(descriptionText.getText().toString());
         }
         //another if is needed for category and another for medias
-        RecipeActivity.setFood(food);
+
         Intent intent = new Intent(this, RecipeActivity.class);
+        RecipeActivity.setFood(food);
         startActivity(intent);
     }
 
@@ -115,7 +123,19 @@ public class AddFoodActivity extends AppCompatActivity {
         food.setName(nameText.getText().toString());
         food.setDescription(descriptionText.getText().toString());
         if (food.getName().equals("")) {
-
+            AlertDialog.Builder errorBuilder = new AlertDialog.Builder(AddFoodActivity.this);
+            View customLayout = getLayoutInflater().inflate(R.layout.food_name_error, null);
+            errorBuilder.setView(customLayout);
+            errorBuilder.setTitle(R.string.error);
+            errorBuilder.setCancelable(false);
+            errorBuilder.setNegativeButton(R.string.ok_label, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                }
+            });
+            AlertDialog errorDialog = errorBuilder.create();
+            errorDialog.show();
         }
     }
 

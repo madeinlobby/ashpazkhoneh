@@ -4,6 +4,8 @@
     <string name="ok_label">OK</string>
     <string name="dismiss_label">Dismiss</string>
     <string name="clear_all_label">Clear all</string>
+    <string name="error">Error</string>
+    <string name="name_is_empty_or_is_used_before">Name is empty or is used before.</string>
 
     <string-array name="food_category_items">
         <item>pasta and noodle</item>

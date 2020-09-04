@@ -27,6 +27,15 @@ public class MainController {
         return null;
     }
 
+    public Food findFoodByName(String name) {
+        for (Food food : allFoods) {
+            if (food.getName().equals(name)) {
+                return food;
+            }
+        }
+        return null;
+    }
+
     public List<Food> getAllFoods() {
         return allFoods;
     }

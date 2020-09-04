@@ -9,8 +9,8 @@ public class Recipe {
     private List<Step> steps;
     private Food food;
 
-    public Recipe(List<Step> steps, Food food) {
-        this.steps = steps;
+    public Recipe(Food food) {
+        this.steps = new ArrayList<>();
         this.food = food;
     }
 

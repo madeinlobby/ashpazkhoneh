@@ -23,11 +23,15 @@ public class RecipeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe);
 
+
+
         RecyclerView recyclerView = findViewById(R.id.stepsRecycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         StepAdaptor stepAdaptor = new StepAdaptor((ArrayList<Step>) food.getRecipe().getSteps(),this);
         recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(),DividerItemDecoration.VERTICAL));
         recyclerView.setAdapter(stepAdaptor);
+
+
     }
 
     public static Food getFood() {
