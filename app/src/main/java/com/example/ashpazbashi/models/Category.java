@@ -1,5 +1,7 @@
 package com.example.ashpazbashi.models;
 
+import com.example.ashpazbashi.views.MainActivity;
+
 public class Category {
 
     private String name;
@@ -8,6 +10,7 @@ public class Category {
     public Category(String name, String description) {
         this.name = name;
         this.description = description;
+        MainActivity.controller.getAllCategories().add(this);
     }
 
     public String getName() {

@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity implements FoodsAdaptor.onFo
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        controller.addDefaultCategories();
 
         RecyclerView recyclerView = findViewById(R.id.foodRecycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

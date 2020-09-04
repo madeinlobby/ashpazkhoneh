@@ -50,4 +50,18 @@ public class MainController {
     public void setAllCategories(List<Category> allCategories) {
         this.allCategories = allCategories;
     }
+
+    public void addDefaultCategories() {
+        Category pasta = new Category("pasta and noodle",null);
+        Category fastFood = new Category("fast food",null);
+        Category soup = new Category("soup",null);
+        Category bread = new Category("bread and cookie",null);
+        Category iceCream = new Category("ice cream",null);
+        Category appetizer = new Category("appetizer",null);
+        Category mainFood = new Category("main food",null);
+        Category dessert = new Category("dessert",null);
+        Category traditional = new Category("traditional",null);
+        Category rice = new Category("rice",null);
+        Category etc = new Category("etc",null);
+    }
 }

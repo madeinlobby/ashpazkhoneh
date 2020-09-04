@@ -23,6 +23,8 @@ public class AddFoodActivity extends AppCompatActivity {
     private Food food;
     String[] categoryItems;
     boolean[] checkedItems;
+    Button addCategory;
+    TextView tvCategory;
     ArrayList<Integer> userSelectedItems = new ArrayList<>();
 
     @Override
@@ -30,8 +32,8 @@ public class AddFoodActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_food);
 
-        Button addCategory = findViewById(R.id.addFoodCategoryButton);
-        final TextView tvCategory = findViewById(R.id.foodCategoryTv);
+        addCategory = findViewById(R.id.addFoodCategoryButton);
+        tvCategory = findViewById(R.id.foodCategoryTv);
 
         categoryItems = getResources().getStringArray(R.array.food_category_items);
         checkedItems = new boolean[categoryItems.length];
@@ -58,10 +60,10 @@ public class AddFoodActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         StringBuilder categories = new StringBuilder();
                         for (Integer userSelectedItem : userSelectedItems) {
-                            categories.append(categoryItems[userSelectedItems.get(userSelectedItem)]);
-                            Category category = MainActivity.controller.findCategoryByName(categoryItems[userSelectedItems.get(userSelectedItem)]);
+                            categories.append(categoryItems[userSelectedItem]);
+                            Category category = MainActivity.controller.findCategoryByName(categoryItems[userSelectedItem]);
                             food.getCategories().add(category);
-                            if(userSelectedItem != userSelectedItems.size() - 1) {
+                            if(userSelectedItems.indexOf(userSelectedItem) != userSelectedItems.size() - 1) {
                                 categories.append(", ");
                             }
                         }
@@ -105,6 +107,16 @@ public class AddFoodActivity extends AppCompatActivity {
         RecipeActivity.setFood(food);
         Intent intent = new Intent(this, RecipeActivity.class);
         startActivity(intent);
+    }
+
+    public void doneButtonTaped(View view) {
+        EditText nameText = findViewById(R.id.editTextTextFoodName);
+        EditText descriptionText = findViewById(R.id.editTextFoodDescription);
+        food.setName(nameText.getText().toString());
+        food.setDescription(descriptionText.getText().toString());
+        if (food.getName().equals("")) {
+
+        }
     }
 
 
