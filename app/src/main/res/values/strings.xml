@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">AshPazBashi</string>
+    <string name="dialog_title">Categories:</string>
+    <string name="ok_label">OK</string>
+    <string name="dismiss_label">Dismiss</string>
+    <string name="clear_all_label">Clear all</string>
+
+    <string-array name="food_category_items">
+        <item>pasta and noodle</item>
+        <item>fast food</item>
+        <item>soup</item>
+        <item>bread and cookie</item>
+        <item>ice cream</item>
+        <item>appetizer</item>
+        <item>main food</item>
+        <item>dessert</item>
+        <item>traditional</item>
+        <item>rice</item>
+        <item>etc</item>
+    </string-array>
 </resources>

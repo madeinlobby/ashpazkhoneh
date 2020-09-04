@@ -18,6 +18,15 @@ public class MainController {
         this.allCategories = new ArrayList<>();
     }
 
+    public Category findCategoryByName(String name) {
+        for (Category category : allCategories) {
+            if (category.getName().equals(name)) {
+                return category;
+            }
+        }
+        return null;
+    }
+
     public List<Food> getAllFoods() {
         return allFoods;
     }
