@@ -37,6 +37,8 @@ public class RecipeActivity extends AppCompatActivity implements StepAdaptor.OnS
     }
 
     public void addStepButtonTapped(View view) {
+
+        AddStepActivity.setRecipe(food.getRecipe());
         Intent intent = new Intent(this, AddStepActivity.class);
         startActivity(intent);
     }

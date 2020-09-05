@@ -11,9 +11,11 @@ public class Step {
     //list of pictures and videos will be added later
 
 
-    public Step(String subject, String description) {
+    public Step(String subject, String description, Recipe recipe) {
         this.subject = subject;
         this.description = description;
+        this.recipe = recipe;
+        this.recipe.getSteps().add(this);
     }
 
     public String getSubject() {
