@@ -22,6 +22,15 @@ public class Food {
         this.name = name;
     }
 
+    public boolean hasCategory(String categoryName) {
+        for (Category category : categories) {
+            if (category.getName().equals(categoryName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public String getName() {
         return name;
     }

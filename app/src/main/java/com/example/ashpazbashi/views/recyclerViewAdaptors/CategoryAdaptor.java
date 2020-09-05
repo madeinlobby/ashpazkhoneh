@@ -53,7 +53,6 @@ public class CategoryAdaptor extends RecyclerView.Adapter<CategoryAdaptor.ViewHo
             super(itemView);
             categoryName = itemView.findViewById(R.id.categoryNameText);
             categoryDescription = itemView.findViewById(R.id.categoryDescriptionText);
-            categoryImage = itemView.findViewById(R.id.categoryImageRecycler);
         }
     }
 }

@@ -136,6 +136,9 @@ public class AddFoodActivity extends AppCompatActivity {
             });
             AlertDialog errorDialog = errorBuilder.create();
             errorDialog.show();
+        } else {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
         }
     }
 
