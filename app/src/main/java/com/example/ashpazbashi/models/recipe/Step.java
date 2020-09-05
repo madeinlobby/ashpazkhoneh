@@ -7,6 +7,7 @@ import java.util.List;
 public class Step {
     private String subject;
     private String description;
+    private Recipe recipe;
     //list of pictures and videos will be added later
 
 
@@ -29,5 +30,13 @@ public class Step {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Recipe getRecipe() {
+        return recipe;
+    }
+
+    public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
     }
 }
