@@ -49,7 +49,7 @@ public class EditFoodActivity extends AppCompatActivity {
             if (food.hasCategory(categoryItems[i])) {
                 checkedItems[i] = true;
                 userSelectedItems.add(i);
-                editCategoryString.append(categoryItems[i] + ",");
+                editCategoryString.append(categoryItems[i]).append(",");
             }
         }
 
