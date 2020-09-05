@@ -150,4 +150,11 @@ public class AddFoodActivity extends AppCompatActivity {
     public void setFood(Food food) {
         this.food = food;
     }
+
+    public void ingredientButtonTapped(View view) {
+        //here we should use a startActivityForResult
+        //will be reformed
+        Intent intent = new Intent(this, IngredientsActivity.class);
+        startActivity(intent);
+    }
 }
