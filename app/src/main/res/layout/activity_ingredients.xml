@@ -7,13 +7,15 @@
     tools:context=".views.IngredientsActivity">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/ingredientsRecyclerView"
         android:layout_width="357dp"
         android:layout_height="575dp"
         tools:layout_editor_absoluteX="27dp"
         tools:layout_editor_absoluteY="26dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
+        android:id="@+id/addIngredientButton"
+        android:onClick="addIngredientClick"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
