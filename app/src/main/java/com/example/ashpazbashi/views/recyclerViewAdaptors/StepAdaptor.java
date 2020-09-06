@@ -19,16 +19,18 @@ public class StepAdaptor extends RecyclerView.Adapter<StepAdaptor.ViewHolder>{
 
     private ArrayList<Step> data;
     private LayoutInflater inflater;
+    private OnStepListener listener;
 
-    public StepAdaptor(ArrayList<Step> data, Context context) {
+    public StepAdaptor(ArrayList<Step> data, Context context, OnStepListener listener) {
         this.data = data;
         this.inflater = LayoutInflater.from(context);
+        this.listener = listener;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(inflater.inflate(R.layout.step_row,parent,false));
+        return new ViewHolder(inflater.inflate(R.layout.step_row,parent,false), listener);
     }
 
     @Override
@@ -43,15 +45,28 @@ public class StepAdaptor extends RecyclerView.Adapter<StepAdaptor.ViewHolder>{
         return data.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView stepSubject;
         ImageView stepImage;
+        OnStepListener onStepListener;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView, OnStepListener onStepListener) {
             super(itemView);
             stepSubject = itemView.findViewById(R.id.stepSubjectText);
             stepImage = itemView.findViewById(R.id.stepImageRecycler);
+            this.onStepListener = onStepListener;
+
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View view) {
+            onStepListener.onClick(getAdapterPosition());
+        }
+    }
+
+    public interface OnStepListener {
+        void onClick(int position);
     }
 }

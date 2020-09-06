@@ -7,12 +7,15 @@ import java.util.List;
 public class Step {
     private String subject;
     private String description;
+    private Recipe recipe;
     //list of pictures and videos will be added later
 
 
-    public Step(String subject, String description) {
+    public Step(String subject, String description, Recipe recipe) {
         this.subject = subject;
         this.description = description;
+        this.recipe = recipe;
+        this.recipe.getSteps().add(this);
     }
 
     public String getSubject() {
@@ -29,5 +32,13 @@ public class Step {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Recipe getRecipe() {
+        return recipe;
+    }
+
+    public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
     }
 }

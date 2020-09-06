@@ -6,6 +6,7 @@
     <string name="clear_all_label">Clear all</string>
     <string name="error">Error</string>
     <string name="name_is_empty_or_is_used_before">Name is empty or is used before.</string>
+    <string name="step_sub_des_error">subject or description cannot be empty</string>
 
     <string-array name="food_category_items">
         <item>pasta and noodle</item>
