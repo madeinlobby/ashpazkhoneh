@@ -152,7 +152,7 @@ public class EditFoodActivity extends AppCompatActivity {
         deleteWarn.setPositiveButton(R.string.yes_label, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                MainActivity.controller.getAllFoods().remove(food);
+                MainActivity.controller.removeFood(food);
                 Intent intent = new Intent(String.valueOf(MainActivity.class));
                 startActivity(intent);
             }
