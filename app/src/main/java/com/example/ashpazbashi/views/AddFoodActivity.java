@@ -104,13 +104,9 @@ public class AddFoodActivity extends AppCompatActivity {
     public void recipeButtonTaped(View view) {
         EditText nameText = findViewById(R.id.editTextTextFoodName);
         EditText descriptionText = findViewById(R.id.editTextFoodDescription);
-        if(!nameText.getText().toString().equals("")) {
-            food.setName(nameText.getText().toString());
-        }
-        if (!descriptionText.getText().toString().equals("")) {
-            food.setDescription(descriptionText.getText().toString());
-        }
-        //another if is needed for category and another for medias
+
+        food.setName(nameText.getText().toString());
+        food.setDescription(descriptionText.getText().toString());
 
         Intent intent = new Intent(this, RecipeActivity.class);
         RecipeActivity.setFood(food);
