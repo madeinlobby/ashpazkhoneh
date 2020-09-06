@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 public class IngredientsActivity extends AppCompatActivity implements IngredientAdaptor.OnIngredientListener {
 
+    static IngredientAdaptor adaptor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,12 +23,14 @@ public class IngredientsActivity extends AppCompatActivity implements Ingredient
 
         RecyclerView recyclerView = findViewById(R.id.ingredientsRecyclerView);
         IngredientAdaptor adapter = new IngredientAdaptor(new ArrayList<Ingredient>(), this, this);
+        IngredientsActivity.adaptor = adapter;
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     public void addIngredientClick(View view) {
         //show dialog and get data
+
     }
 
     @Override

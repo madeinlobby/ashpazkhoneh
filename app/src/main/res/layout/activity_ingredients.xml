@@ -8,18 +8,26 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/ingredientsRecyclerView"
-        android:layout_width="357dp"
-        android:layout_height="575dp"
-        tools:layout_editor_absoluteX="27dp"
-        tools:layout_editor_absoluteY="26dp" />
+        android:layout_width="360dp"
+        android:layout_height="590dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.198" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addIngredientButton"
-        android:onClick="addIngredientClick"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:clickable="true"
-        app:srcCompat="@android:drawable/ic_menu_add"
-        tools:layout_editor_absoluteX="319dp"
-        tools:layout_editor_absoluteY="640dp" />
+        android:onClick="addIngredientClick"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.929"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ingredientsRecyclerView"
+        app:layout_constraintVertical_bias="0.731"
+        app:srcCompat="@android:drawable/ic_menu_add" />
 </androidx.constraintlayout.widget.ConstraintLayout>

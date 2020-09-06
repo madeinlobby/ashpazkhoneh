@@ -51,7 +51,6 @@ public class IngredientAdaptor extends RecyclerView.Adapter<IngredientAdaptor.Vi
 
     class ViewHolder extends RecyclerView.ViewHolder  {
 
-
         TextView ingredientName;
         TextView ingredientAmount;
         ImageView deleteIngredientImage;
@@ -95,7 +94,6 @@ public class IngredientAdaptor extends RecyclerView.Adapter<IngredientAdaptor.Vi
     public interface OnIngredientListener {
         void onIngredientItemCLick(int position);
         void onDeleteIngredientClick(int position);
-
     }
 
 
