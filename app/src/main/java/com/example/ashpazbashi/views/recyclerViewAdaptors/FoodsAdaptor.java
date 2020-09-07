@@ -38,7 +38,7 @@ public class FoodsAdaptor extends RecyclerView.Adapter<FoodsAdaptor.ViewHolder> 
         Food food = data.get(position);
         holder.nameField.setText(food.getName());
         if(food.getCategories().size() != 0) {
-            holder.categoryField.setText(food.getCategories().get(0).getName() + "and ...");
+            holder.categoryField.setText(food.getCategories().get(0).getName() + " ...");
         } else {
             holder.categoryField.setText("No category");
         }
