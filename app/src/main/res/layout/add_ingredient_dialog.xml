@@ -8,6 +8,7 @@
     >
 
     <EditText
+        android:id="@+id/newIngredientNameEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Ingredient Name"
@@ -22,6 +23,7 @@
         android:orientation="horizontal">
 
         <EditText
+            android:id="@+id/newIngredientUnitEditText"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:hint="Unit">
@@ -29,6 +31,7 @@
         </EditText>
 
         <EditText
+            android:id="@+id/newIngredientAmountEditText"
             android:layout_marginStart="40dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

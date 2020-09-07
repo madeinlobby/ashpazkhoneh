@@ -25,7 +25,7 @@
             android:id="@+id/ingredientAmount"
             android:layout_width="140dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="15dp"
             android:text="amount"
             android:textSize="18sp" />
 
@@ -33,7 +33,7 @@
             android:id="@+id/removeIngredientImage"
             android:layout_width="53dp"
             android:layout_height="49dp"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="10dp"
             android:src="@drawable/ic_delete" />
 
 
