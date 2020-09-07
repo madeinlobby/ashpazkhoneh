@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.ashpazbashi.R;
+import com.example.ashpazbashi.models.Food;
 import com.example.ashpazbashi.models.ingredients.Ingredient;
 import com.example.ashpazbashi.views.recyclerViewAdaptors.IngredientAdaptor;
 
@@ -23,6 +24,9 @@ public class IngredientsActivity extends AppCompatActivity implements Ingredient
 
     //for getting data arrayList from adapter we keep a reference
     static IngredientAdaptor adaptor;
+    static Food food;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +34,7 @@ public class IngredientsActivity extends AppCompatActivity implements Ingredient
         setContentView(R.layout.activity_ingredients);
 
         RecyclerView recyclerView = findViewById(R.id.ingredientsRecyclerView);
-        IngredientAdaptor adapter = new IngredientAdaptor(new ArrayList<Ingredient>(), this, this);
+        IngredientAdaptor adapter = new IngredientAdaptor((ArrayList<Ingredient>) food.getIngredients(), this, this);
         IngredientsActivity.adaptor = adapter;
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -71,6 +75,10 @@ public class IngredientsActivity extends AppCompatActivity implements Ingredient
                                 String unitStr = unit.getText().toString();
                                 adaptor.getData().add(new Ingredient(nameStr, amountStr, unitStr));
                                 adaptor.notifyDataSetChanged();
+                                // chon darim listo az food migirim dige nemikhad
+                                //adaptor ro negah darim vali chon momkene farze mahal
+                                //liste voroodie adaptor avaz beshe az inja taghiirato
+                                //set mikonim ala barekatellah :)
                             }
                         })
                 .setNegativeButton("Cancel",
@@ -100,5 +108,14 @@ public class IngredientsActivity extends AppCompatActivity implements Ingredient
         // when user clicks on delete icon on item
         Toast.makeText(IngredientsActivity.this, "click delete " + position, Toast.LENGTH_SHORT).show();
 
+    }
+
+
+    public static Food getFood() {
+        return food;
+    }
+
+    public static void setFood(Food food) {
+        IngredientsActivity.food = food;
     }
 }

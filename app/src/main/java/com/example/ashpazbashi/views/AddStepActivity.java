@@ -49,7 +49,6 @@ public class AddStepActivity extends AppCompatActivity {
             Intent intent = new Intent(this, RecipeActivity.class);
             startActivity(intent);
         }
-
     }
 
     public static Recipe getRecipe() {

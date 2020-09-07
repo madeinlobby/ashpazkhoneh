@@ -35,7 +35,6 @@ public class AddFoodActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_food);
-
         addCategory = findViewById(R.id.addFoodCategoryButton);
         tvCategory = findViewById(R.id.foodCategoryTv);
 
@@ -154,7 +153,10 @@ public class AddFoodActivity extends AppCompatActivity {
     public void ingredientButtonTapped(View view) {
         //here we should use a startActivityForResult
         //will be reformed
+
+        //point : ghazie cancele chon listo az food midim :)
         Intent intent = new Intent(this, IngredientsActivity.class);
+        IngredientsActivity.setFood(food);
         startActivity(intent);
     }
 }
