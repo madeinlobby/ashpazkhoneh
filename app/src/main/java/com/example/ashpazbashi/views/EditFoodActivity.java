@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -109,6 +110,62 @@ public class EditFoodActivity extends AppCompatActivity {
         });
     }
 
+    public void editFoodRecipeButtonTapped(View view) {
+        food.setName(nameField.getText().toString());
+        food.setDescription(descriptionField.getText().toString());
+        Intent intent = new Intent(this, RecipeActivity.class);
+        RecipeActivity.setFood(food);
+        startActivity(intent);
+    }
+
+    public void editFoodDoneButton(View view) {
+        food.setName(nameField.getText().toString());
+        food.setDescription(descriptionField.getText().toString());
+        if (food.getName().equals("")) {
+            AlertDialog.Builder errorBuilder = new AlertDialog.Builder(EditFoodActivity.this);
+            View customLayout = getLayoutInflater().inflate(R.layout.food_name_error, null);
+            errorBuilder.setView(customLayout);
+            errorBuilder.setTitle(R.string.error);
+            errorBuilder.setCancelable(false);
+            errorBuilder.setNegativeButton(R.string.ok_label, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                }
+            });
+            AlertDialog errorDialog = errorBuilder.create();
+            errorDialog.show();
+        } else {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
+    }
+
+    public void editFoodDeleteButton(View view) {
+        food.setName(nameField.getText().toString());
+        food.setDescription(descriptionField.getText().toString());
+        AlertDialog.Builder deleteWarn = new AlertDialog.Builder(EditFoodActivity.this);
+        View customLayout = getLayoutInflater().inflate(R.layout.delete_food_warning, null);
+        deleteWarn.setView(customLayout);
+        deleteWarn.setTitle(R.string.warning);
+        deleteWarn.setCancelable(false);
+        deleteWarn.setPositiveButton(R.string.yes_label, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                MainActivity.controller.removeFood(food);
+                Intent intent = new Intent(String.valueOf(MainActivity.class));
+                startActivity(intent);
+            }
+        });
+        deleteWarn.setNegativeButton(R.string.no_label, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        AlertDialog warnDialog = deleteWarn.create();
+        warnDialog.show();
+    }
 
     public static Food getFood() {
         return food;

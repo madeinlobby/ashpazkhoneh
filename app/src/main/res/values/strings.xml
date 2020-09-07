@@ -2,11 +2,16 @@
     <string name="app_name">AshPazBashi</string>
     <string name="dialog_title">Categories:</string>
     <string name="ok_label">OK</string>
+    <string name="yes_label">Yes</string>
+    <string name="no_label">No</string>
     <string name="dismiss_label">Dismiss</string>
     <string name="clear_all_label">Clear all</string>
     <string name="error">Error</string>
+    <string name="warning">Warning</string>
     <string name="name_is_empty_or_is_used_before">Name is empty or is used before.</string>
     <string name="step_sub_des_error">subject or description cannot be empty</string>
+    <string name="food_delete_warning">Are you sure about deleting this food?</string>
+    <string name="step_delete_warning">Are you sure about deleting this step?</string>
 
     <string-array name="food_category_items">
         <item>pasta and noodle</item>

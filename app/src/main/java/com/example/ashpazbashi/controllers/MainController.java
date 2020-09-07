@@ -3,6 +3,7 @@ package com.example.ashpazbashi.controllers;
 import com.example.ashpazbashi.models.Category;
 import com.example.ashpazbashi.models.Food;
 import com.example.ashpazbashi.models.ingredients.Ingredient;
+import com.example.ashpazbashi.models.recipe.Step;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +35,14 @@ public class MainController {
             }
         }
         return null;
+    }
+
+    public void removeStep(Step step) {
+        step.getRecipe().getSteps().remove(step);
+    }
+
+    public void removeFood(Food food) {
+        allFoods.remove(food);
     }
 
     public List<Food> getAllFoods() {
