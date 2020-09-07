@@ -30,7 +30,7 @@ public class IngredientsActivity extends AppCompatActivity implements Ingredient
 
     public void addIngredientClick(View view) {
         //show dialog and get data
-
+        
     }
 
     @Override
