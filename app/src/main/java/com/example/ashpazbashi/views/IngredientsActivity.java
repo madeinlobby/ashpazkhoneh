@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Trace;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -79,6 +80,7 @@ public class IngredientsActivity extends AppCompatActivity implements Ingredient
                                 //adaptor ro negah darim vali chon momkene farze mahal
                                 //liste voroodie adaptor avaz beshe az inja taghiirato
                                 //set mikonim ala barekatellah :)
+                                //albate nitify niaz be adapter dare fek konam
                             }
                         })
                 .setNegativeButton("Cancel",
@@ -101,13 +103,15 @@ public class IngredientsActivity extends AppCompatActivity implements Ingredient
     public void onIngredientItemCLick(int position) {
         // when user clicks on an item
         Toast.makeText(IngredientsActivity.this, "click item " + position, Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
     public void onDeleteIngredientClick(int position) {
         // when user clicks on delete icon on item
         Toast.makeText(IngredientsActivity.this, "click delete " + position, Toast.LENGTH_SHORT).show();
-
+        adaptor.getData().remove(position);
+        adaptor.notifyDataSetChanged();
     }
 
 
@@ -117,5 +121,16 @@ public class IngredientsActivity extends AppCompatActivity implements Ingredient
 
     public static void setFood(Food food) {
         IngredientsActivity.food = food;
+    }
+
+    public void doneIngredientClick(View view) {
+        if (adaptor.getData().isEmpty()) {
+            Toast.makeText(IngredientsActivity.this, "The list is empty!", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            Toast.makeText(IngredientsActivity.this, "The list saved :)", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+
     }
 }
