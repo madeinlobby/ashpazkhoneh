@@ -25,6 +25,9 @@ public class EditStepActivity extends AppCompatActivity {
 
         subjectField = findViewById(R.id.editTextEditStepSubject);
         descriptionField = findViewById(R.id.editTextEditStepDescription);
+
+        subjectField.setText(step.getSubject());
+        descriptionField.setText(step.getDescription());
     }
 
     public void editStepDoneButtonTapped(View view) {
