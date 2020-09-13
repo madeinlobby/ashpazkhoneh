@@ -33,6 +33,7 @@ public class AddFoodActivity extends AppCompatActivity implements PicAdaptor.OnP
     private Recipe recipe;
     String[] categoryItems;
     boolean[] checkedItems;
+    PicAdaptor picAdaptor;
     Button addCategory;
     Button addMedia;
     TextView tvCategory;
@@ -127,7 +128,7 @@ public class AddFoodActivity extends AppCompatActivity implements PicAdaptor.OnP
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(linearLayoutManager);
-        PicAdaptor picAdaptor = new PicAdaptor(food.getPicsAddress(), this, this);
+        picAdaptor = new PicAdaptor(food.getPicsAddress(), this, this);
         recyclerView.setAdapter(picAdaptor);
     }
 
@@ -142,7 +143,8 @@ public class AddFoodActivity extends AppCompatActivity implements PicAdaptor.OnP
         chooser.setOnSelectListener(new StorageChooser.OnSelectListener() {
             @Override
             public void onSelect(String path) {
-                MainActivity.controller.addPic(food, path);
+                MainActivity.controller.addPicIndex(food, path, 0);
+                picAdaptor.notifyItemInserted(0);
             }
         });
         chooser.show();

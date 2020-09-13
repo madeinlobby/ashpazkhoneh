@@ -41,6 +41,10 @@ public class MainController {
         food.getPicsAddress().add(path);
     }
 
+    public void addPicIndex(Food food, String path, int index) {
+        food.getPicsAddress().add(index, path);
+    }
+
     public void removeStep(Step step) {
         step.getRecipe().getSteps().remove(step);
     }
