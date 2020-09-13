@@ -11,6 +11,7 @@ import android.view.View;
 
 import com.example.ashpazbashi.R;
 import com.example.ashpazbashi.models.Food;
+import com.example.ashpazbashi.models.recipe.Recipe;
 import com.example.ashpazbashi.models.recipe.Step;
 import com.example.ashpazbashi.views.recyclerViewAdaptors.StepAdaptor;
 
@@ -37,7 +38,6 @@ public class RecipeActivity extends AppCompatActivity implements StepAdaptor.OnS
     }
 
     public void addStepButtonTapped(View view) {
-
         AddStepActivity.setRecipe(food.getRecipe());
         Intent intent = new Intent(this, AddStepActivity.class);
         startActivity(intent);

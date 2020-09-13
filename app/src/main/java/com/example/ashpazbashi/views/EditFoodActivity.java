@@ -20,6 +20,7 @@ import com.codekidlabs.storagechooser.StorageChooser;
 import com.example.ashpazbashi.R;
 import com.example.ashpazbashi.models.Category;
 import com.example.ashpazbashi.models.Food;
+import com.example.ashpazbashi.views.mediaView.ImageFocusActivity;
 import com.example.ashpazbashi.views.recyclerViewAdaptors.PicAdaptor;
 
 import java.util.ArrayList;
@@ -45,6 +46,13 @@ public class EditFoodActivity extends AppCompatActivity implements PicAdaptor.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_food);
+
+        RecyclerView recyclerView = findViewById(R.id.editFoodAddPicRecycler);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        picAdaptor = new PicAdaptor(food.getPicsAddress(), this, this);
+        recyclerView.setAdapter(picAdaptor);
 
         nameField = findViewById(R.id.editTextEditFoodName);
         descriptionField = findViewById(R.id.editTextEditFoodDescription);
@@ -138,12 +146,7 @@ public class EditFoodActivity extends AppCompatActivity implements PicAdaptor.On
             }
         });
 
-        RecyclerView recyclerView = findViewById(R.id.addFoodPicRecycler);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        picAdaptor = new PicAdaptor(food.getPicsAddress(), this, this);
-        recyclerView.setAdapter(picAdaptor);
+
     }
 
     public void ShowFilePicker(){
@@ -252,6 +255,8 @@ public class EditFoodActivity extends AppCompatActivity implements PicAdaptor.On
 
     @Override
     public void click(int position) {
-
+        ImageFocusActivity.setImgPath(food.getPicsAddress().get(position));
+        Intent intent = new Intent(this, ImageFocusActivity.class);
+        startActivity(intent);
     }
 }

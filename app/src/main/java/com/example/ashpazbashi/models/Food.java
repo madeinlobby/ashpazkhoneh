@@ -19,6 +19,7 @@ public class Food {
         this.picsAddress = new ArrayList<>();
         this.ingredients = new ArrayList<>();
         this.categories = new ArrayList<>();
+        this.recipe = new Recipe(this);
         MainActivity.controller.getAllFoods().add(this);
         this.name = name;
     }

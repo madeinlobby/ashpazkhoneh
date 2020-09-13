@@ -21,6 +21,7 @@ import com.example.ashpazbashi.R;
 import com.example.ashpazbashi.models.Category;
 import com.example.ashpazbashi.models.Food;
 import com.example.ashpazbashi.models.recipe.Recipe;
+import com.example.ashpazbashi.views.mediaView.ImageFocusActivity;
 import com.example.ashpazbashi.views.recyclerViewAdaptors.PicAdaptor;
 
 import java.util.ArrayList;
@@ -162,7 +163,7 @@ public class AddFoodActivity extends AppCompatActivity implements PicAdaptor.OnP
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         if (requestCode == FILEPICKER_PERMISSIONS) {// If request is cancelled, the result arrays are empty.
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(
@@ -240,6 +241,8 @@ public class AddFoodActivity extends AppCompatActivity implements PicAdaptor.OnP
 
     @Override
     public void click(int position) {
-
+        ImageFocusActivity.setImgPath(food.getPicsAddress().get(position));
+        Intent intent = new Intent(this, ImageFocusActivity.class);
+        startActivity(intent);
     }
 }

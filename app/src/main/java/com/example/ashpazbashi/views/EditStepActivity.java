@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.codekidlabs.storagechooser.StorageChooser;
 import com.example.ashpazbashi.R;
 import com.example.ashpazbashi.models.recipe.Step;
+import com.example.ashpazbashi.views.mediaView.ImageFocusActivity;
 import com.example.ashpazbashi.views.recyclerViewAdaptors.PicAdaptor;
 
 import static com.example.ashpazbashi.views.AddFoodActivity.hasPermissions;
@@ -59,7 +60,7 @@ public class EditStepActivity extends AppCompatActivity implements PicAdaptor.On
             }
         });
 
-        RecyclerView recyclerView = findViewById(R.id.addStepPicRecycler);
+        RecyclerView recyclerView = findViewById(R.id.editStepRecycler);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -101,8 +102,6 @@ public class EditStepActivity extends AppCompatActivity implements PicAdaptor.On
                         Toast.LENGTH_SHORT
                 ).show();
             }
-
-            return;
         }
     }
 
@@ -151,6 +150,8 @@ public class EditStepActivity extends AppCompatActivity implements PicAdaptor.On
 
     @Override
     public void click(int position) {
-
+        ImageFocusActivity.setImgPath(step.getPicAddress().get(position));
+        Intent intent = new Intent(this, ImageFocusActivity.class);
+        startActivity(intent);
     }
 }

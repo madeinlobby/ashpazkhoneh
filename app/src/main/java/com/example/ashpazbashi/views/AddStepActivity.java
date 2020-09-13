@@ -19,6 +19,7 @@ import com.codekidlabs.storagechooser.StorageChooser;
 import com.example.ashpazbashi.R;
 import com.example.ashpazbashi.models.recipe.Recipe;
 import com.example.ashpazbashi.models.recipe.Step;
+import com.example.ashpazbashi.views.mediaView.ImageFocusActivity;
 import com.example.ashpazbashi.views.recyclerViewAdaptors.PicAdaptor;
 
 import static com.example.ashpazbashi.views.AddFoodActivity.hasPermissions;
@@ -99,8 +100,6 @@ public class AddStepActivity extends AppCompatActivity implements PicAdaptor.OnP
                         Toast.LENGTH_SHORT
                 ).show();
             }
-
-            return;
         }
     }
 
@@ -140,6 +139,8 @@ public class AddStepActivity extends AppCompatActivity implements PicAdaptor.OnP
 
     @Override
     public void click(int position) {
-
+        ImageFocusActivity.setImgPath(step.getPicAddress().get(position));
+        Intent intent = new Intent(this, ImageFocusActivity.class);
+        startActivity(intent);
     }
 }
