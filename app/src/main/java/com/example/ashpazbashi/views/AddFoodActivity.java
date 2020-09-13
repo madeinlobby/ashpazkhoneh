@@ -1,40 +1,36 @@
 package com.example.ashpazbashi.views;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-
-import android.Manifest;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.codekidlabs.storagechooser.StorageChooser;
 import com.example.ashpazbashi.R;
 import com.example.ashpazbashi.models.Category;
 import com.example.ashpazbashi.models.Food;
-import com.example.ashpazbashi.models.ingredients.Ingredient;
 import com.example.ashpazbashi.models.recipe.Recipe;
+import com.example.ashpazbashi.views.recyclerViewAdaptors.PicAdaptor;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.regex.Pattern;
 
-public class AddFoodActivity extends AppCompatActivity {
+
+public class AddFoodActivity extends AppCompatActivity implements PicAdaptor.OnPicListener{
 
     private Food food;
     private Recipe recipe;
-    private Ingredient ingredient;
     String[] categoryItems;
     boolean[] checkedItems;
     Button addCategory;
@@ -125,8 +121,14 @@ public class AddFoodActivity extends AppCompatActivity {
 
         this.food = new Food(null);
         this.recipe = new Recipe(food);
-        //get an Ingredient object an set it to food
         this.food.setRecipe(recipe);
+
+        RecyclerView recyclerView = findViewById(R.id.addFoodPicRecycler);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        PicAdaptor picAdaptor = new PicAdaptor(food.getPicsAddress(), this, this);
+        recyclerView.setAdapter(picAdaptor);
     }
 
     public void ShowFilePicker(){
@@ -140,7 +142,7 @@ public class AddFoodActivity extends AppCompatActivity {
         chooser.setOnSelectListener(new StorageChooser.OnSelectListener() {
             @Override
             public void onSelect(String path) {
-                Toast.makeText(AddFoodActivity.this, "The selected path is : " + path, Toast.LENGTH_SHORT).show();
+                MainActivity.controller.addPic(food, path);
             }
         });
         chooser.show();
@@ -232,5 +234,10 @@ public class AddFoodActivity extends AppCompatActivity {
         Intent intent = new Intent(this, IngredientsActivity.class);
         IngredientsActivity.setFood(food);
         startActivity(intent);
+    }
+
+    @Override
+    public void click(int position) {
+
     }
 }
