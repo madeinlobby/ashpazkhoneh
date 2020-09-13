@@ -37,6 +37,10 @@ public class MainController {
         return null;
     }
 
+    public void addPic(Food food, String path) {
+        food.getPicsAddress().add(path);
+    }
+
     public void removeStep(Step step) {
         step.getRecipe().getSteps().remove(step);
     }

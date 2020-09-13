@@ -96,7 +96,7 @@
         app:layout_constraintVertical_bias="0.172" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/addMediaButtonAddFood"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="add media"

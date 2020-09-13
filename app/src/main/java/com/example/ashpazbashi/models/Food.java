@@ -13,9 +13,10 @@ public class Food {
     private String description;
     private List<Ingredient> ingredients;
     private Recipe recipe;
-    //list of pictures and videos will be added later
+    private ArrayList<String> picsAddress;
 
     public Food(String name) {
+        this.picsAddress = new ArrayList<>();
         this.ingredients = new ArrayList<>();
         this.categories = new ArrayList<>();
         MainActivity.controller.getAllFoods().add(this);
@@ -69,5 +70,13 @@ public class Food {
 
     public void setRecipe(Recipe recipe) {
         this.recipe = recipe;
+    }
+
+    public ArrayList<String> getPicsAddress() {
+        return picsAddress;
+    }
+
+    public void setPicsAddress(ArrayList<String> picsAddress) {
+        this.picsAddress = picsAddress;
     }
 }
