@@ -37,12 +37,12 @@ public class MainController {
         return null;
     }
 
-    public void addPic(Food food, String path) {
-        food.getPicsAddress().add(path);
-    }
-
     public void addPicIndex(Food food, String path, int index) {
         food.getPicsAddress().add(index, path);
+    }
+
+    public void addStepPicIndex(Step step, String path, int index) {
+        step.getPicAddress().add(index, path);
     }
 
     public void removeStep(Step step) {

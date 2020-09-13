@@ -10,7 +10,7 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="subject"
+        android:text="@string/subject"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.164"
@@ -22,7 +22,7 @@
         android:id="@+id/textView8"
         android:layout_width="76dp"
         android:layout_height="24dp"
-        android:text="description"
+        android:text="@string/description"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.131"
@@ -59,10 +59,10 @@
         app:layout_constraintVertical_bias="0.089" />
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/addStepAddPicBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="add media"
+        android:text="@string/add_media"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -74,7 +74,7 @@
         android:id="@+id/button8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="done"
+        android:text="@string/done"
         android:onClick="addStepDoneButtonTapped"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -82,4 +82,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.918" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="405dp"
+        android:layout_height="183dp"
+        android:layout_marginBottom="12dp"
+        android:orientation="horizontal"
+        android:id="@+id/addStepPicRecycler"
+        app:layout_constraintBottom_toTopOf="@+id/button8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button7"
+        app:layout_constraintVertical_bias="0.585" />
 </androidx.constraintlayout.widget.ConstraintLayout>

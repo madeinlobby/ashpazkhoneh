@@ -12,6 +12,10 @@
     <string name="step_sub_des_error">subject or description cannot be empty</string>
     <string name="food_delete_warning">Are you sure about deleting this food?</string>
     <string name="step_delete_warning">Are you sure about deleting this step?</string>
+    <string name="done">done</string>
+    <string name="add_media">add media</string>
+    <string name="description">description</string>
+    <string name="subject">subject</string>
 
     <string-array name="food_category_items">
         <item>pasta and noodle</item>

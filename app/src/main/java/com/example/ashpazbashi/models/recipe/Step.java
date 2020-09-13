@@ -2,17 +2,19 @@ package com.example.ashpazbashi.models.recipe;
 
 import android.media.Image;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Step {
     private String subject;
     private String description;
     private Recipe recipe;
-    //list of pictures and videos will be added later
+    private ArrayList<String> picAddress;
 
 
     public Step(String subject, String description, Recipe recipe) {
         this.subject = subject;
+        this.picAddress = new ArrayList<>();
         this.description = description;
         this.recipe = recipe;
         this.recipe.getSteps().add(this);
@@ -40,5 +42,9 @@ public class Step {
 
     public void setRecipe(Recipe recipe) {
         this.recipe = recipe;
+    }
+
+    public ArrayList<String> getPicAddress() {
+        return picAddress;
     }
 }
