@@ -1,32 +1,44 @@
 package com.example.ashpazbashi.views;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.codekidlabs.storagechooser.StorageChooser;
 import com.example.ashpazbashi.R;
 import com.example.ashpazbashi.models.Category;
 import com.example.ashpazbashi.models.Food;
+import com.example.ashpazbashi.views.recyclerViewAdaptors.PicAdaptor;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class EditFoodActivity extends AppCompatActivity {
+import static com.example.ashpazbashi.views.AddFoodActivity.hasPermissions;
+
+public class EditFoodActivity extends AppCompatActivity implements PicAdaptor.OnPicListener{
 
     private static Food food;
     EditText nameField;
     Button addCategory;
+    Button addPicBtn;
     TextView tvCategory;
     EditText descriptionField;
     String[] categoryItems;
     boolean[] checkedItems;
+    PicAdaptor picAdaptor;
+    public static final int FILEPICKER_PERMISSIONS = 1;
     ArrayList<Integer> userSelectedItems = new ArrayList<>();
 
     @Override
@@ -41,6 +53,7 @@ public class EditFoodActivity extends AppCompatActivity {
         descriptionField.setText(food.getDescription());
 
         addCategory = findViewById(R.id.editFoodCategoryButton);
+        addPicBtn = findViewById(R.id.editFoodPicBtn);
         tvCategory = findViewById(R.id.editCategoryTv);
 
         categoryItems = getResources().getStringArray(R.array.food_category_items);
@@ -55,6 +68,22 @@ public class EditFoodActivity extends AppCompatActivity {
         }
 
         tvCategory.setText(editCategoryString.toString());
+
+        addPicBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String[] PERMISSIONS = {
+                        android.Manifest.permission.READ_EXTERNAL_STORAGE,
+                        android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+                };
+
+                if(hasPermissions(EditFoodActivity.this, PERMISSIONS)){
+                    ShowFilePicker();
+                } else{
+                    ActivityCompat.requestPermissions(EditFoodActivity.this, PERMISSIONS, FILEPICKER_PERMISSIONS);
+                }
+            }
+        });
 
         addCategory.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,6 +137,52 @@ public class EditFoodActivity extends AppCompatActivity {
                 categoryDialog.show();
             }
         });
+
+        RecyclerView recyclerView = findViewById(R.id.addFoodPicRecycler);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        picAdaptor = new PicAdaptor(food.getPicsAddress(), this, this);
+        recyclerView.setAdapter(picAdaptor);
+    }
+
+    public void ShowFilePicker(){
+        final StorageChooser chooser = new StorageChooser.Builder()
+                .withActivity(EditFoodActivity.this)
+                .withFragmentManager(getFragmentManager())
+                .withMemoryBar(true)
+                .allowCustomPath(true)
+                .setType(StorageChooser.FILE_PICKER)
+                .build();
+        chooser.setOnSelectListener(new StorageChooser.OnSelectListener() {
+            @Override
+            public void onSelect(String path) {
+                MainActivity.controller.addPicIndex(food, path, 0);
+                picAdaptor.notifyItemInserted(0);
+            }
+        });
+        chooser.show();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (requestCode == FILEPICKER_PERMISSIONS) {// If request is cancelled, the result arrays are empty.
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(
+                        EditFoodActivity.this,
+                        "Permission granted! Please click on pick a file once again.",
+                        Toast.LENGTH_SHORT
+                ).show();
+            } else {
+                Toast.makeText(
+                        EditFoodActivity.this,
+                        "Permission denied to read your External storage :(",
+                        Toast.LENGTH_SHORT
+                ).show();
+            }
+
+            return;
+        }
     }
 
     public void editFoodRecipeButtonTapped(View view) {
@@ -173,5 +248,10 @@ public class EditFoodActivity extends AppCompatActivity {
 
     public static void setFood(Food food) {
         EditFoodActivity.food = food;
+    }
+
+    @Override
+    public void click(int position) {
+
     }
 }

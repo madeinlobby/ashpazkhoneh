@@ -1,22 +1,35 @@
 package com.example.ashpazbashi.views;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.codekidlabs.storagechooser.StorageChooser;
 import com.example.ashpazbashi.R;
 import com.example.ashpazbashi.models.recipe.Step;
+import com.example.ashpazbashi.views.recyclerViewAdaptors.PicAdaptor;
 
-public class EditStepActivity extends AppCompatActivity {
+import static com.example.ashpazbashi.views.AddFoodActivity.hasPermissions;
+
+public class EditStepActivity extends AppCompatActivity implements PicAdaptor.OnPicListener{
 
     private static Step step;
     EditText subjectField;
     EditText descriptionField;
+    Button addPicBtn;
+    PicAdaptor picAdaptor;
+    public static final int FILEPICKER_PERMISSIONS = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +41,69 @@ public class EditStepActivity extends AppCompatActivity {
 
         subjectField.setText(step.getSubject());
         descriptionField.setText(step.getDescription());
+        addPicBtn = findViewById(R.id.editStepAddPicBtn);
+
+        addPicBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String[] PERMISSIONS = {
+                        android.Manifest.permission.READ_EXTERNAL_STORAGE,
+                        android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+                };
+
+                if(hasPermissions(EditStepActivity.this, PERMISSIONS)){
+                    ShowFilePicker();
+                } else {
+                    ActivityCompat.requestPermissions(EditStepActivity.this, PERMISSIONS, FILEPICKER_PERMISSIONS);
+                }
+            }
+        });
+
+        RecyclerView recyclerView = findViewById(R.id.addStepPicRecycler);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        picAdaptor = new PicAdaptor(step.getPicAddress(), this, this);
+        recyclerView.setAdapter(picAdaptor);
+    }
+
+    public void ShowFilePicker(){
+        final StorageChooser chooser = new StorageChooser.Builder()
+                .withActivity(EditStepActivity.this)
+                .withFragmentManager(getFragmentManager())
+                .withMemoryBar(true)
+                .allowCustomPath(true)
+                .setType(StorageChooser.FILE_PICKER)
+                .build();
+        chooser.setOnSelectListener(new StorageChooser.OnSelectListener() {
+            @Override
+            public void onSelect(String path) {
+                MainActivity.controller.addStepPicIndex(step, path, 0);
+                picAdaptor.notifyItemInserted(0);
+            }
+        });
+        chooser.show();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (requestCode == FILEPICKER_PERMISSIONS) {// If request is cancelled, the result arrays are empty.
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(
+                        EditStepActivity.this,
+                        "Permission granted! Please click on pick a file once again.",
+                        Toast.LENGTH_SHORT
+                ).show();
+            } else {
+                Toast.makeText(
+                        EditStepActivity.this,
+                        "Permission denied to read your External storage :(",
+                        Toast.LENGTH_SHORT
+                ).show();
+            }
+
+            return;
+        }
     }
 
     public void editStepDoneButtonTapped(View view) {
@@ -71,5 +147,10 @@ public class EditStepActivity extends AppCompatActivity {
 
     public static void setStep(Step step) {
         EditStepActivity.step = step;
+    }
+
+    @Override
+    public void click(int position) {
+
     }
 }
