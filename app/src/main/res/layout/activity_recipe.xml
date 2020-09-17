@@ -20,14 +20,18 @@
         android:id="@+id/floatingActionButton2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="#FF0048"
         android:clickable="true"
+        android:focusable="true"
+        android:onClick="addStepButtonTapped"
+        android:scrollbarTrackHorizontal="@drawable/drawable_plus_to_close"
+        android:scrollbarTrackVertical="@drawable/drawable_plus_to_close"
+        app:backgroundTint="#FF0049"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.887"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.936"
-        app:srcCompat="@android:drawable/ic_input_add"
-        android:onClick="addStepButtonTapped"
-        android:focusable="true" />
+        app:srcCompat="@drawable/drawable_close_to_plus" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,10 +12,31 @@
     <string name="step_sub_des_error">subject or description cannot be empty</string>
     <string name="food_delete_warning">Are you sure about deleting this food?</string>
     <string name="step_delete_warning">Are you sure about deleting this step?</string>
-    <string name="done">done</string>
-    <string name="add_media">add media</string>
-    <string name="description">description</string>
+<!--    <string name="done">done</string>-->
+<!--    <string name="add_media">add media</string>-->
+<!--    <string name="description">description</string>-->
     <string name="subject">subject</string>
+<!--    <string name="category">category</string>-->
+<!--    <string name="description">description</string>-->
+<!--    <string name="ingredients">ingredients</string>-->
+<!--    <string name="recipe">recipe</string>-->
+<!--    <string name="add_media">add media</string>-->
+<!--    <string name="done">done</string>-->
+<!--    <string name="add">+</string>-->
+<!--    <string name="name">name</string>-->
+    <string name="amount">amount</string>
+    <string name="multiautocompletetextview">MultiAutoCompleteTextView</string>
+    <string name="company_name">company name</string>
+    <string name="add_picture">add picture</string>
+    <string name="done">done</string>
+    <string name="delete">Delete</string>
+    <string name="name">name</string>
+    <string name="add">+</string>
+    <string name="category">category</string>
+    <string name="description">description</string>
+    <string name="ingredients">ingredients</string>
+    <string name="recipe">recipe</string>
+    <string name="add_media">add media</string>
 
     <string-array name="food_category_items">
         <item>pasta and noodle</item>

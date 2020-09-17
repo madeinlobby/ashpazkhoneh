@@ -9,8 +9,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/foodRecycler"
-        android:layout_width="396dp"
-        android:layout_height="598dp"
+        android:layout_width="463dp"
+        android:layout_height="718dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,15 +21,20 @@
         android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="#FF0048"
+        android:backgroundTintMode="add"
         android:clickable="true"
         android:focusable="true"
         android:onClick="addNewFoodButton"
+        android:scrollbarTrackHorizontal="@drawable/drawable_plus_to_close"
+        android:scrollbarTrackVertical="@drawable/drawable_plus_to_close"
+        app:backgroundTint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.881"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.928"
-        app:srcCompat="@android:drawable/ic_menu_add" />
+        app:srcCompat="@drawable/drawable_plus_to_close" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
