@@ -11,7 +11,6 @@ import android.view.View;
 
 import com.example.ashpazbashi.R;
 import com.example.ashpazbashi.models.Food;
-import com.example.ashpazbashi.models.recipe.Recipe;
 import com.example.ashpazbashi.models.recipe.Step;
 import com.example.ashpazbashi.views.recyclerViewAdaptors.StepAdaptor;
 

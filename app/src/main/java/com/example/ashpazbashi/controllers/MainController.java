@@ -1,11 +1,16 @@
 package com.example.ashpazbashi.controllers;
 
+import android.database.Cursor;
+import com.example.ashpazbashi.localDatabase.DatabaseHelper;
 import com.example.ashpazbashi.models.Category;
 import com.example.ashpazbashi.models.Food;
 import com.example.ashpazbashi.models.ingredients.Ingredient;
+import com.example.ashpazbashi.models.recipe.Recipe;
 import com.example.ashpazbashi.models.recipe.Step;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MainController {
@@ -37,8 +42,47 @@ public class MainController {
         return null;
     }
 
+    public void insertFoodInDB(DatabaseHelper databaseHelper, Food food) {
+        Gson gson = new Gson();
+        String categoriesJSON = gson.toJson(food.getCategories());
+        String ingredientsJSON = gson.toJson(food.getIngredients());
+        String recipeJSON = gson.toJson(food.getRecipe());
+        String picsJSON = gson.toJson(food.getPicsAddress());
+
+        databaseHelper.insertData(
+             food.getName(), categoriesJSON, food.getDescription(),
+             ingredientsJSON, recipeJSON, picsJSON
+        );
+    }
+
+    public void readFromDB(DatabaseHelper databaseHelper) {
+        Cursor res = databaseHelper.getAllData();
+        if (res.getCount() == 0) {
+            return;
+        }
+        while (res.moveToNext()) {
+            if (findFoodByName(res.getString(1)) == null) {
+                Food food = new Food(res.getString(1));
+                food.setCategories(Arrays.asList(new Gson().fromJson(res.getString(2), Category[].class)));
+                food.setDescription(res.getString(3));
+                food.setIngredients(Arrays.asList(new Gson().fromJson(res.getString(4), Ingredient[].class)));
+                food.setRecipe(new Gson().fromJson(res.getString(5), Recipe.class));
+                food.setPicsAddress(Arrays.asList(new Gson().fromJson(res.getString(6), String[].class)));
+                allFoods.add(food);
+            }
+        }
+    }
+
     public void addPicIndex(Food food, String path, int index) {
         food.getPicsAddress().add(index, path);
+    }
+
+    public void addFood(Food food) {
+        allFoods.add(food);
+    }
+
+    public void addStepToRecipe(Step step, Recipe recipe) {
+        recipe.getSteps().add(step);
     }
 
     public void addStepPicIndex(Step step, String path, int index) {
@@ -46,7 +90,11 @@ public class MainController {
     }
 
     public void removeStep(Step step) {
-        step.getRecipe().getSteps().remove(step);
+        for (Food food : allFoods) {
+            if (food.getRecipe().getFoodName().equals(step.getRecipeName())) {
+                food.getRecipe().getSteps().remove(step);
+            }
+        }
     }
 
     public void removeFood(Food food) {

@@ -2,7 +2,6 @@ package com.example.ashpazbashi.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.app.AlertDialog;
@@ -122,14 +121,14 @@ public class AddFoodActivity extends AppCompatActivity implements PicAdaptor.OnP
         });
 
         this.food = new Food(null);
-        this.recipe = new Recipe(food);
+        this.recipe = new Recipe(food.getName());
         this.food.setRecipe(recipe);
 
         RecyclerView recyclerView = findViewById(R.id.addFoodPicRecycler);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(linearLayoutManager);
-        picAdaptor = new PicAdaptor(food.getPicsAddress(), this, this);
+        picAdaptor = new PicAdaptor((ArrayList<String>) food.getPicsAddress(), this, this);
         recyclerView.setAdapter(picAdaptor);
     }
 
@@ -178,8 +177,6 @@ public class AddFoodActivity extends AppCompatActivity implements PicAdaptor.OnP
                         Toast.LENGTH_SHORT
                 ).show();
             }
-
-            return;
         }
     }
 
@@ -216,6 +213,8 @@ public class AddFoodActivity extends AppCompatActivity implements PicAdaptor.OnP
             AlertDialog errorDialog = errorBuilder.create();
             errorDialog.show();
         } else {
+            MainActivity.controller.addFood(food);
+            MainActivity.controller.insertFoodInDB(MainActivity.myDb, food); //able to use its boolean output for debug
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }

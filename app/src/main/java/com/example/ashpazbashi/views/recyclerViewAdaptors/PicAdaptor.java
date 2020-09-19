@@ -15,13 +15,15 @@ import com.example.ashpazbashi.R;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 public class PicAdaptor extends RecyclerView.Adapter<PicAdaptor.ViewHolder>{
-    private ArrayList<String> data;
+    private List<String> data;
     private LayoutInflater inflater;
     private OnPicListener listener;
 
-    public PicAdaptor(ArrayList<String> data, Context context, OnPicListener listener) {
+    public PicAdaptor(List<String> data, Context context, OnPicListener listener) {
+        this.data = new ArrayList<>();
         this.data = data;
         this.inflater = LayoutInflater.from(context);
         this.listener = listener;

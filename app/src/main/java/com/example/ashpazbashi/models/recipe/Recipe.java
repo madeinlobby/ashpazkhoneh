@@ -1,17 +1,15 @@
 package com.example.ashpazbashi.models.recipe;
 
-import com.example.ashpazbashi.models.Food;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class Recipe {
     private List<Step> steps;
-    private Food food;
+    private String foodName;
 
-    public Recipe(Food food) {
+    public Recipe(String foodNme) {
         this.steps = new ArrayList<>();
-        this.food = food;
+        this.foodName = foodNme;
     }
 
     public List<Step> getSteps() {
@@ -22,11 +20,11 @@ public class Recipe {
         this.steps = steps;
     }
 
-    public Food getFood() {
-        return food;
+    public String getFoodName() {
+        return foodName;
     }
 
-    public void setFood(Food food) {
-        this.food = food;
+    public void setFoodName(String foodName) {
+        this.foodName = foodName;
     }
 }

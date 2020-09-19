@@ -56,7 +56,7 @@ public class AddStepActivity extends AppCompatActivity implements PicAdaptor.OnP
             }
         });
 
-        step = new Step(null,null,recipe);
+        step = new Step(null,null, recipe.getFoodName());
 
         RecyclerView recyclerView = findViewById(R.id.addStepPicRecycler);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -124,6 +124,7 @@ public class AddStepActivity extends AppCompatActivity implements PicAdaptor.OnP
         } else {
             step.setSubject(subjectField.getText().toString());
             step.setDescription(descriptionField.getText().toString());
+            MainActivity.controller.addStepToRecipe(step, recipe);
             Intent intent = new Intent(this, RecipeActivity.class);
             startActivity(intent);
         }
