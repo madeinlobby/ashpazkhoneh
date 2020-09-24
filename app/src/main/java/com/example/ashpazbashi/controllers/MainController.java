@@ -11,6 +11,7 @@ import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class MainController {
@@ -64,14 +65,26 @@ public class MainController {
             if (!id.contains(res.getString(0))) {
                 Food food = new Food(res.getString(1));
                 id.add(res.getString(0));
-                food.setCategories(Arrays.asList(new Gson().fromJson(res.getString(2), Category[].class)));
+                ArrayList<Category> destCat = new ArrayList<>();
+                ArrayList<Ingredient> destIngredient = new ArrayList<>();
+                ArrayList<String> pics = new ArrayList<>();
+                Collections.addAll(destCat, new Gson().fromJson(res.getString(2), Category[].class));
+                Collections.addAll(destIngredient, new Gson().fromJson(res.getString(4), Ingredient[].class));
+                Collections.addAll(pics, new Gson().fromJson(res.getString(6), String[].class));
+                food.setCategories(destCat);
                 food.setDescription(res.getString(3));
-                food.setIngredients(Arrays.asList(new Gson().fromJson(res.getString(4), Ingredient[].class)));
+                food.setIngredients(destIngredient);
                 food.setRecipe(new Gson().fromJson(res.getString(5), Recipe.class));
-                food.setPicsAddress(Arrays.asList(new Gson().fromJson(res.getString(6), String[].class)));
+                food.setPicsAddress(pics);
                 allFoods.add(food);
             }
         }
+    }
+
+    public ArrayList arrayToList(Object[] objects) {
+        ArrayList<Object> res = new ArrayList<>();
+        Collections.addAll(res, objects);
+        return res;
     }
 
     public void updateRowDB(DatabaseHelper databaseHelper, Food food, String id) {

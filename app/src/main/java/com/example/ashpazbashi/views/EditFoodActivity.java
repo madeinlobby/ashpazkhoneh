@@ -123,7 +123,7 @@ public class EditFoodActivity extends AppCompatActivity implements PicAdaptor.On
                         for (Integer userSelectedItem : userSelectedItems) {
                             categories.append(categoryItems[userSelectedItem]);
                             Category category = MainActivity.controller.findCategoryByName(categoryItems[userSelectedItem]);
-                            food.getCategories().add(category);
+                            food.addCategory(category);
                             if(userSelectedItems.indexOf(userSelectedItem) != userSelectedItems.size() - 1) {
                                 categories.append(", ");
                             }

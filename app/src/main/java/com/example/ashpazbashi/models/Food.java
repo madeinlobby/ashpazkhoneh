@@ -78,4 +78,8 @@ public class Food {
     public void setPicsAddress(List<String> picsAddress) {
         this.picsAddress = picsAddress;
     }
+
+    public void addCategory(Category category) {
+        categories.add(category);
+    }
 }
