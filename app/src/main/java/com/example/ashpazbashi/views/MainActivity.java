@@ -21,18 +21,24 @@ public class MainActivity extends AppCompatActivity implements FoodsAdaptor.onFo
 
     public static MainController controller = new MainController();
     public static DatabaseHelper myDb;
+    public static ArrayList<String> food_id;
+    public static int limit = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        myDb = new DatabaseHelper(this);
-        controller.addDefaultCategories();
-        controller.readFromDB(myDb);
+        if (limit == 0) {
+            myDb = new DatabaseHelper(this);
+            food_id = new ArrayList<>();
+            controller.addDefaultCategories();
+            controller.readFromDB(myDb, food_id);
+            limit++;
+        }
 
         RecyclerView recyclerView = findViewById(R.id.foodRecycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        FoodsAdaptor foodsAdaptor = new FoodsAdaptor((ArrayList<Food>) controller.getAllFoods(),this, this);
+        FoodsAdaptor foodsAdaptor = new FoodsAdaptor((ArrayList<Food>) controller.getAllFoods(),this, food_id,  this);
         recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(),DividerItemDecoration.VERTICAL));
         recyclerView.setAdapter(foodsAdaptor);
     }
@@ -49,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements FoodsAdaptor.onFo
         Food currentFood = controller.getAllFoods().get(position);
         EditFoodActivity.setFood(currentFood);
         Intent intent = new Intent(this, EditFoodActivity.class);
+        intent.putExtra("id", String.valueOf(food_id.get(position)));
         startActivity(intent);
 
     }

@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import com.example.ashpazbashi.views.MainActivity;
+
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "food.db";
@@ -53,5 +55,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor getAllData() {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         return sqLiteDatabase.rawQuery("select * from " + TABLE_NAME, null);
+    }
+
+    public boolean updateData(String id, String name, String categories, String description,
+                              String ingredients, String recipe, String picAddress) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL_1, id);
+        contentValues.put(COL_2, name);
+        contentValues.put(COL_3, categories);
+        contentValues.put(COL_4, description);
+        contentValues.put(COL_5, ingredients);
+        contentValues.put(COL_6, recipe);
+        contentValues.put(COL_7, picAddress);
+        sqLiteDatabase.update(TABLE_NAME, contentValues, "ID = ?", new String[] {id});
+        return true;
     }
 }

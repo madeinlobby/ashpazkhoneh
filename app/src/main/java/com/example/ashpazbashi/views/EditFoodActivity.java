@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.codekidlabs.storagechooser.StorageChooser;
 import com.example.ashpazbashi.R;
+import com.example.ashpazbashi.controllers.MainController;
 import com.example.ashpazbashi.models.Category;
 import com.example.ashpazbashi.models.Food;
 import com.example.ashpazbashi.views.mediaView.ImageFocusActivity;
@@ -34,6 +35,7 @@ public class EditFoodActivity extends AppCompatActivity implements PicAdaptor.On
     EditText nameField;
     Button addCategory;
     Button addPicBtn;
+    String id;
     TextView tvCategory;
     EditText descriptionField;
     String[] categoryItems;
@@ -46,6 +48,10 @@ public class EditFoodActivity extends AppCompatActivity implements PicAdaptor.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_food);
+
+        if(getIntent().hasExtra("id")) {
+            id = getIntent().getStringExtra("id");
+        }
 
         RecyclerView recyclerView = findViewById(R.id.editFoodAddPicRecycler);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -215,6 +221,7 @@ public class EditFoodActivity extends AppCompatActivity implements PicAdaptor.On
             errorDialog.show();
         } else {
             Intent intent = new Intent(this, MainActivity.class);
+            MainActivity.controller.updateRowDB(MainActivity.myDb, food, id);
             startActivity(intent);
         }
     }

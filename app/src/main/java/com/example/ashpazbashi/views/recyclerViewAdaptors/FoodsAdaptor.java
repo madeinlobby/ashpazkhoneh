@@ -18,10 +18,12 @@ import java.util.ArrayList;
 public class FoodsAdaptor extends RecyclerView.Adapter<FoodsAdaptor.ViewHolder> {
 
     private ArrayList<Food> data;
+    private ArrayList<String> food_id;
     private LayoutInflater inflater;
     private onFoodListener listener;
 
-    public FoodsAdaptor(ArrayList<Food> data, Context context, onFoodListener listener) {
+    public FoodsAdaptor(ArrayList<Food> data, Context context, ArrayList<String> food_id, onFoodListener listener) {
+        this.food_id = food_id;
         this.data = data;
         this.inflater = LayoutInflater.from(context);
         this.listener = listener;

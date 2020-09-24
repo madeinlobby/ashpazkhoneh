@@ -55,14 +55,15 @@ public class MainController {
         );
     }
 
-    public void readFromDB(DatabaseHelper databaseHelper) {
+    public void readFromDB(DatabaseHelper databaseHelper, ArrayList<String> id) {
         Cursor res = databaseHelper.getAllData();
         if (res.getCount() == 0) {
             return;
         }
         while (res.moveToNext()) {
-            if (findFoodByName(res.getString(1)) == null) {
+            if (!id.contains(res.getString(0))) {
                 Food food = new Food(res.getString(1));
+                id.add(res.getString(0));
                 food.setCategories(Arrays.asList(new Gson().fromJson(res.getString(2), Category[].class)));
                 food.setDescription(res.getString(3));
                 food.setIngredients(Arrays.asList(new Gson().fromJson(res.getString(4), Ingredient[].class)));
@@ -72,6 +73,19 @@ public class MainController {
             }
         }
     }
+
+    public void updateRowDB(DatabaseHelper databaseHelper, Food food, String id) {
+        Gson gson = new Gson();
+        String categoriesJSON = gson.toJson(food.getCategories());
+        String ingredientsJSON = gson.toJson(food.getIngredients());
+        String recipeJSON = gson.toJson(food.getRecipe());
+        String picsJSON = gson.toJson(food.getPicsAddress());
+
+        databaseHelper.updateData(
+                id, food.getName(), categoriesJSON, food.getDescription(),
+                ingredientsJSON, recipeJSON, picsJSON);
+    }
+
 
     public void addPicIndex(Food food, String path, int index) {
         food.getPicsAddress().add(index, path);
@@ -126,16 +140,16 @@ public class MainController {
     }
 
     public void addDefaultCategories() {
-        Category pasta = new Category("pasta and noodle",null);
-        Category fastFood = new Category("fast food",null);
-        Category soup = new Category("soup",null);
-        Category bread = new Category("bread and cookie",null);
-        Category iceCream = new Category("ice cream",null);
-        Category appetizer = new Category("appetizer",null);
-        Category mainFood = new Category("main food",null);
-        Category dessert = new Category("dessert",null);
-        Category traditional = new Category("traditional",null);
-        Category rice = new Category("rice",null);
-        Category etc = new Category("etc",null);
+        new Category("pasta and noodle",null);
+        new Category("fast food",null);
+        new Category("soup",null);
+        new Category("bread and cookie",null);
+        new Category("ice cream",null);
+        new Category("appetizer",null);
+        new Category("main food",null);
+        new Category("dessert",null);
+        new Category("traditional",null);
+        new Category("rice",null);
+        new Category("etc",null);
     }
 }
