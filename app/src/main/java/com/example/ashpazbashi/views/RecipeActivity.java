@@ -40,6 +40,7 @@ public class RecipeActivity extends AppCompatActivity implements StepAdaptor.OnS
         AddStepActivity.setRecipe(food.getRecipe());
         Intent intent = new Intent(this, AddStepActivity.class);
         startActivity(intent);
+        finish();
     }
 
     public static Food getFood() {

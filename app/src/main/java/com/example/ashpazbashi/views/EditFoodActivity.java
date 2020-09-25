@@ -1,11 +1,13 @@
 package com.example.ashpazbashi.views;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -18,7 +20,6 @@ import android.widget.Toast;
 
 import com.codekidlabs.storagechooser.StorageChooser;
 import com.example.ashpazbashi.R;
-import com.example.ashpazbashi.controllers.MainController;
 import com.example.ashpazbashi.models.Category;
 import com.example.ashpazbashi.models.Food;
 import com.example.ashpazbashi.views.mediaView.ImageFocusActivity;
@@ -33,6 +34,7 @@ public class EditFoodActivity extends AppCompatActivity implements PicAdaptor.On
 
     private static Food food;
     EditText nameField;
+    Context context;
     Button addCategory;
     Button addPicBtn;
     String id;
@@ -48,6 +50,9 @@ public class EditFoodActivity extends AppCompatActivity implements PicAdaptor.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_food);
+        ActionBar ab = getSupportActionBar();
+        ab.setTitle(food.getName());
+        context = EditFoodActivity.this;
 
         if(getIntent().hasExtra("id")) {
             id = getIntent().getStringExtra("id");
@@ -120,6 +125,7 @@ public class EditFoodActivity extends AppCompatActivity implements PicAdaptor.On
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         StringBuilder categories = new StringBuilder();
+                        food.getCategories().clear();
                         for (Integer userSelectedItem : userSelectedItems) {
                             categories.append(categoryItems[userSelectedItem]);
                             Category category = MainActivity.controller.findCategoryByName(categoryItems[userSelectedItem]);
@@ -237,8 +243,10 @@ public class EditFoodActivity extends AppCompatActivity implements PicAdaptor.On
         deleteWarn.setPositiveButton(R.string.yes_label, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                MainActivity.controller.deleteRowDB(MainActivity.myDb, id);
+                //MainActivity.food_id.remove(id);
                 MainActivity.controller.removeFood(food);
-                Intent intent = new Intent(String.valueOf(MainActivity.class));
+                Intent intent = new Intent(context, MainActivity.class);
                 startActivity(intent);
             }
         });
@@ -250,10 +258,6 @@ public class EditFoodActivity extends AppCompatActivity implements PicAdaptor.On
         });
         AlertDialog warnDialog = deleteWarn.create();
         warnDialog.show();
-    }
-
-    public static Food getFood() {
-        return food;
     }
 
     public static void setFood(Food food) {

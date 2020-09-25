@@ -79,6 +79,8 @@ public class AddFoodActivity extends AppCompatActivity implements PicAdaptor.OnP
                             userSelectedItems.add(position);
                         } else {
                             userSelectedItems.remove(Integer.valueOf(position));
+                            //Category category = MainActivity.controller.findCategoryByName(categoryItems[position]);
+                            //food.getCategories().remove(category);
                         }
                     }
                 });
@@ -88,6 +90,7 @@ public class AddFoodActivity extends AppCompatActivity implements PicAdaptor.OnP
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         StringBuilder categories = new StringBuilder();
+                        food.getCategories().clear();
                         for (Integer userSelectedItem : userSelectedItems) {
                             categories.append(categoryItems[userSelectedItem]);
                             Category category = MainActivity.controller.findCategoryByName(categoryItems[userSelectedItem]);

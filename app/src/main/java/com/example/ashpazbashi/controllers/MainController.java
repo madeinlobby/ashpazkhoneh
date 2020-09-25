@@ -68,9 +68,11 @@ public class MainController {
                 ArrayList<Category> destCat = new ArrayList<>();
                 ArrayList<Ingredient> destIngredient = new ArrayList<>();
                 ArrayList<String> pics = new ArrayList<>();
+
                 Collections.addAll(destCat, new Gson().fromJson(res.getString(2), Category[].class));
                 Collections.addAll(destIngredient, new Gson().fromJson(res.getString(4), Ingredient[].class));
                 Collections.addAll(pics, new Gson().fromJson(res.getString(6), String[].class));
+                
                 food.setCategories(destCat);
                 food.setDescription(res.getString(3));
                 food.setIngredients(destIngredient);
@@ -79,12 +81,6 @@ public class MainController {
                 allFoods.add(food);
             }
         }
-    }
-
-    public ArrayList arrayToList(Object[] objects) {
-        ArrayList<Object> res = new ArrayList<>();
-        Collections.addAll(res, objects);
-        return res;
     }
 
     public void updateRowDB(DatabaseHelper databaseHelper, Food food, String id) {
@@ -99,6 +95,9 @@ public class MainController {
                 ingredientsJSON, recipeJSON, picsJSON);
     }
 
+    public void deleteRowDB(DatabaseHelper databaseHelper, String id) {
+        databaseHelper.deleteData(id);
+    }
 
     public void addPicIndex(Food food, String path, int index) {
         food.getPicsAddress().add(index, path);

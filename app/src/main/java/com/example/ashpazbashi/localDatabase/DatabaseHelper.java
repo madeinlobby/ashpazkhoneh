@@ -71,4 +71,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.update(TABLE_NAME, contentValues, "ID = ?", new String[] {id});
         return true;
     }
+
+    public void deleteData(String id) {
+        SQLiteDatabase database = this.getWritableDatabase();
+        database.delete(TABLE_NAME, "ID = ?", new String[] {id});
+    }
+
 }

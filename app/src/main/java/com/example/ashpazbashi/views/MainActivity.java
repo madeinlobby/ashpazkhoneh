@@ -1,5 +1,6 @@
 package com.example.ashpazbashi.views;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -58,5 +59,13 @@ public class MainActivity extends AppCompatActivity implements FoodsAdaptor.onFo
         intent.putExtra("id", String.valueOf(food_id.get(position)));
         startActivity(intent);
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            recreate();
+        }
     }
 }

@@ -127,6 +127,7 @@ public class AddStepActivity extends AppCompatActivity implements PicAdaptor.OnP
             MainActivity.controller.addStepToRecipe(step, recipe);
             Intent intent = new Intent(this, RecipeActivity.class);
             startActivity(intent);
+            finish();
         }
     }
 
